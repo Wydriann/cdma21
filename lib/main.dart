@@ -11,24 +11,36 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   List<String> _products = ['Computador'];
+  String _newTask;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: Center(child: Text('CDM - Tarefa A2.1'))),
+        appBar: AppBar(
+          title: Center(
+            child: Text('CDM - Tarefa A2.1'),
+          ),
+        ),
         body: Column(children: [
+          Center(
+            child: TextField(
+              onChanged: (String newTask) {
+                _newTask = newTask;
+              },
+            ),
+          ),
           Container(
               margin: EdgeInsets.all(20.0),
               child: Center(
                 child: RaisedButton(
                     onPressed: () {
                       setState(() {
-                        _products.add('Mouse');
+                        _addToTaskList(_newTask);
                       });
                     },
                     child: Text(
-                      'Olá Mundo!',
+                      'Adiconar tarefa',
                       style: TextStyle(fontSize: 22),
                     )),
               )),
@@ -51,5 +63,9 @@ class _MyAppState extends State<MyApp> {
         ]),
       ),
     );
+  }
+
+  void _addToTaskList(String newTask) {
+    _products.add(newTask);
   }
 }
